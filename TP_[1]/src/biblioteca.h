@@ -15,5 +15,8 @@ float SumarOperadores(float numeroUno, float numeroDos);
 float RestarOperadores(float numeroUno, float numeroDos);
 float DividirOperadores(float numeroUno, float numeroDos);
 float multiplicarOperadores(float numeroUno, float numeroDos);
+int ValidarEntero(float numeroA, float numeroB);
+int ValidarNumeroUno(float numeroA);
+int ValidarNumeroDos(float numeroB);
 
 #endif /* BIBLIOTECA_H_ */

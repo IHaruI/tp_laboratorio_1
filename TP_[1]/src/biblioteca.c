@@ -265,58 +265,116 @@ void MostrarMultiplicacion(float numeroUno, float numeroDos, float multiplicacio
 }
 
 /// @fn void MostrarFactorial(float, float)
-/// @brief Muestra el factorial de los operando y verifica si se ingreso un decimal.
+/// @brief Muestra el factorial de los operando y verifica si se ingreso un decimal o un negativo.
 /// @param numeroUno Primer operador ingresado.
 /// @param numeroDos Segundo operador ingresado.
 
 void MostrarFactorial(float numeroUno, float numeroDos)
 {
-    int factorialA = 1;
-    int factorialB = 1;
-    int i;
-    int verificacionA;
-    int verificacionB;
+	int i;
+	int factorialA;
+	int factorialB;
+    int verEnteros;
+    int verEnteroUno;
+    int verEnteroDos;
 
-    verificacionA = numeroUno;
-    verificacionB = numeroDos;
+    factorialA = 1;
+    factorialB = 1;
 
-    // Verifica si ambos numeros son decimales.
-    if(numeroUno - verificacionA && numeroDos - verificacionB)
+    verEnteros = ValidarEntero(numeroUno, numeroDos);
+    verEnteroUno = ValidarNumeroUno(numeroUno);
+    verEnteroDos = ValidarNumeroDos(numeroDos);
+
+    for(i = 1; i <= numeroUno; i++)
     {
-        printf("Solo se puede factoriar numero enteros.\n");
-        printf("-----------------------------------------\n");
+    	factorialA = factorialA * i;
     }
-    // Verifica si el primer numero es decimal.
-    else if(numeroUno - verificacionA || numeroUno < 0)
+    for(i = 1; i <= numeroDos; i++)
     {
-        for(i = 1; i <= numeroDos; i++)
-        {
-            factorialB = factorialB * i;
-        }
-        printf("El factorial de %g es: No hay factorial de este numero, y el El factorial de %g es: %d\n", numeroUno, numeroDos, factorialB);
-        printf("-----------------------------------------\n");
+    	factorialB = factorialB * i;
     }
-    // Verifica si el segundo numero es decimal.
-    else if(numeroDos - verificacionB || numeroDos < 0)
+
+    if(verEnteros == 1)
     {
-        for(i = 1; i <= numeroUno; i++)
-        {
-            factorialA = factorialA * i;
-        }
-        printf("El factorial de %g es: %d y el El factorial de %g es: No hay factorial de este numero.\n", numeroUno, factorialA, numeroDos);
-        printf("-----------------------------------------\n");
+    	printf("El factorial de %g es: %d y el El factorial de %g es: %d\n", numeroUno, factorialA, numeroDos, factorialB);
+    	printf("-----------------------------------------\n");
+    }
+    else if(verEnteroUno == 1)
+    {
+    	printf("El factorial de %g es: %d, y el El factorial de %g es: No hay factorial de este numero.\n", numeroUno, factorialA, numeroDos);
+    	printf("-----------------------------------------\n");
+    }
+    else if(verEnteroDos == 1)
+    {
+      	printf("El factorial de %g es: No hay factorial de este numero, y el El factorial de %g es: %d.\n", numeroUno, numeroDos, factorialB);
+       	printf("-----------------------------------------\n");
     }
     else
     {
-        for(i = 1; i <= numeroUno; i++)
-        {
-            factorialA = factorialA * i;
-        }
-        for(i = 1; i <= numeroDos; i++)
-        {
-            factorialB = factorialB * i;
-        }
-	    printf("El factorial de %g es: %d y el El factorial de %g es: %d\n", numeroUno, factorialA, numeroDos, factorialB);
-	    printf("-----------------------------------------\n");
+    	printf("Solo se puede factoriar numero enteros.\n");
+    	printf("-----------------------------------------\n");
     }
+}
+
+/// @fn int ValidarEntero(float, float)
+/// @brief Verifica si los numeros ingresados son enteros positivos.
+/// @param numeroA Primer operador ingresado.
+/// @param numeroB Segundo operador ingresado.
+/// @return Si es verdadero o falso.
+
+int ValidarEntero(float numeroA, float numeroB)
+{
+	int verEntero = 0;
+	int validarUno;
+	int validarDos;
+
+	validarUno = numeroA;
+	validarDos = numeroB;
+
+	if (validarUno == numeroA && validarDos == numeroB && numeroA >= 0 && numeroB >= 0)
+	{
+		verEntero = 1;
+	}
+
+	return verEntero;
+}
+
+/// @fn int ValidarNumeroUno(float)
+/// @brief Verifica si el primer numero ingresado es un entero positivo.
+/// @param numeroA Primer operador ingresado.
+/// @return Si es verdadero o falso.
+
+int ValidarNumeroUno(float numeroA)
+{
+	int verNumeroUno = 0;
+	int validarUno;
+
+	validarUno = numeroA;
+
+	if (validarUno == numeroA && numeroA >= 0)
+	{
+		verNumeroUno = 1;
+	}
+
+	return verNumeroUno;
+}
+
+/// @fn int ValidarNumeroDos(float)
+/// @brief Verifica si el segundo numero ingresado es un entero positivo.
+/// @param numeroB Segundo operador ingresado.
+/// @return Si es verdadero o falso.
+
+int ValidarNumeroDos(float numeroB)
+{
+	int verNumeroDos = 0;
+	int validarDos;
+
+	validarDos = numeroB;
+
+	if (validarDos == numeroB && numeroB >= 0)
+	{
+		verNumeroDos = 1;
+	}
+
+	return verNumeroDos;
 }

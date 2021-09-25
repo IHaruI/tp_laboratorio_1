@@ -24,7 +24,7 @@ int main(void) {
 	float suma; // Resultado de la suma.
 	float resta; // Resultado de la resta.
 	float division; // Resultado de la devision.
-	float multiplicar; // Resultado de la multiplicacion.
+	float multiplicar; // Resultado de la multiplicacion.z
 
 	// Inicializaciones de las variables.
 	opciones = 0;
