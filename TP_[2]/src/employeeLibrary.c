@@ -25,25 +25,25 @@ void initEmployees(eEmpleados empleados[], int tam)
 int menu()
 {
     int opcion;
-    system("cls");
-    printf("\n----- Menu de Opciones -----\n");
+    printf("\n----- Menu de Opciones -----\n\n");
     printf("1. Alta de empleado.\n");
     printf("2. Baja de empleado.\n");
     printf("3. Modificar de empleado.\n");
-    printf("4. Informar\n");
+    printf("4. Informar.\n");
     printf("5. Salir.\n\n");
     printf("Ingrese unas de las opciones: ");
+    fflush(stdin);
     scanf("%d", &opcion);
 
     return opcion;
 }
 
 /// @fn int altaEmpleado(eEmpleados[], int, int)
-/// @brief Se pide los datos del nuevo empleado, se guarda en una validacion temporal y si la validacion esta todo ok lo guardo en la lista de empleado.
+/// @brief Se pide los datos del nuevo empleado, se guarda en una validacion temporal y si la validacion esta correctamente se guarda en la lista de empleado.
 /// @param empleado Es el array de la estructura eEmpledos.
 /// @param tam Cantidad maxima de empleados.
 /// @param id Se asigna a cada empleado registrado.
-/// @return	Retorna todo Ok.
+/// @return	Retorna un 1 si se completo el alta con exito.
 
 int altaEmpleado(eEmpleados empleado[],int tam, int id)
 {
@@ -61,14 +61,13 @@ int altaEmpleado(eEmpleados empleado[],int tam, int id)
 
     retorno = 0;
 
-    system("cls");
     printf("\n----- Alta de Empleados -----\n\n");
 
     indice = buscarIndiceLibre(empleado, tam);
 
     if(indice == -1)
     {
-        printf("Sistema Completo. No se pueden agregar mas Empleados\n");
+        printf("Sistema Completo. No se pueden agregar mas empleados.\n");
     }
     else
     {
@@ -112,7 +111,7 @@ int altaEmpleado(eEmpleados empleado[],int tam, int id)
 
     	while(validarNumeroFlotante == 1)
     	{
-    		printf("Error. Ingrese solo nuneros flotantes.\n\n");
+    		printf("Error. Ingrese solo numeros flotantes.\n\n");
             printf("Ingrese su salario: ");
         	fflush(stdin);
         	fgets(ingresarSalario, 51, stdin);
@@ -120,7 +119,7 @@ int altaEmpleado(eEmpleados empleado[],int tam, int id)
         	validarNumeroFlotante = ValidarNumeroFlotante(ingresarSalario);
     	}
 
-    	salary = atof(ingresarSalario);    // Transforma la cadena de caracteres un valor flotante.
+    	salary = atof(ingresarSalario);    // Transforma la cadena de caracteres a un valor flotante.
 
         printf("Ingrese su sector: ");
     	fflush(stdin);
@@ -130,7 +129,7 @@ int altaEmpleado(eEmpleados empleado[],int tam, int id)
 
     	while(validarNumeroEntero == 1)
     	{
-    		printf("Error. Ingrese solo nuneros enteros.\n\n");
+    		printf("Error. Ingrese solo numeros enteros.\n\n");
             printf("Ingrese su sector: ");
         	fflush(stdin);
         	fgets(ingresarSector, 51, stdin);
@@ -300,7 +299,7 @@ eEmpleados addEmployees(int id, char name[], char lastname[], float salary, int 
 /// @brief Baja de empleado por id.
 /// @param empleado Es el array de la estructura eEmpledos.
 /// @param tam Cantidad maxima de empleados.
-/// @return todo Ok.
+/// @return Retorna un 1 si se completo la baja con exito.
 
 int bajaEmpleado(eEmpleados empleado[], int tam)
 {
@@ -317,13 +316,14 @@ int bajaEmpleado(eEmpleados empleado[], int tam)
         printf("\n----- Baja de Empleados -----\n\n");
 
         printf("Ingrese ID del empleado: ");
+        fflush(stdin);
         scanf("%d", &id);
 
         indice = findEmployeeById(id, empleado, tam);
 
         if(indice == -1 )
         {
-            printf("\nNo tenemos registrado ese ID\n");
+            printf("\nNo tenemos registrado ese ID.\n");
         }
         else
         {
@@ -343,15 +343,14 @@ int bajaEmpleado(eEmpleados empleado[], int tam)
             }
             else
             {
-                printf("\n\nSe ha cancelado la baja\n");
+                printf("\n\nSe ha cancelado la baja.\n");
             }
             system("pause");
         }
     }
     else
     {
-        system("cls");
-        printf("No hay ningun empleado cargado...\n");
+        printf("No hay ningun empleado cargado. . .\n");
         printf("Ingrese un empleado.\n");
         system("pause");
     }
@@ -406,7 +405,7 @@ int findEmployeeById(int id, eEmpleados empleado[], int tam)
 
 void mostrarEmpleado(eEmpleados xPersona)
 {
-    printf(" %2d      %10s     %10s      %6.2f        %2d \n\n",
+    printf(" %2d      %10s     %10s      %6.2f        %2d \n",
     		xPersona.id,
 			xPersona.name,
 			xPersona.lastName,
@@ -419,7 +418,7 @@ void mostrarEmpleado(eEmpleados xPersona)
 /// @brief Modifica empleado por id.
 /// @param empleado Es el array de la estructura eEmpledos.
 /// @param tam Cantidad maxima de empleados.
-/// @return Todo Ok.
+/// @return Retorna un 1 si se completo la modificacion con exito.
 
 int modificarEmpleado(eEmpleados empleado[], int tam)
 {
@@ -441,9 +440,7 @@ int modificarEmpleado(eEmpleados empleado[], int tam)
 
     if(buscarEmpleado(empleado,tam))
     {
-
-        system("cls");
-        printf("----- Modificacion de Empleado -----\n\n");
+        printf("\n----- Modificacion de Empleado -----\n\n");
 
         printf("Ingrese ID del empleado: ");
         scanf("%d", &indice);
@@ -519,7 +516,7 @@ int modificarEmpleado(eEmpleados empleado[], int tam)
 
                 		while (validarNumeroFlotante == 1)
                 		{
-							printf("Error. Ingrese solo nuneros flotantes.\n\n");
+							printf("Error. Ingrese solo numeros flotantes.\n\n");
 							printf("Ingrese su salario: ");
 							fflush(stdin);
 							fgets(ingresarSalario, 51, stdin);
@@ -543,7 +540,7 @@ int modificarEmpleado(eEmpleados empleado[], int tam)
 
                 		while (validarNumeroEntero == 1)
                 		{
-                			printf("Error. Ingrese solo nuneros enteros.\n\n");
+                			printf("Error. Ingrese solo numeros enteros.\n\n");
                 			printf("Ingrese su sector: ");
                 			fflush(stdin);
                 			fgets(ingresarSector, 51, stdin);
@@ -563,7 +560,7 @@ int modificarEmpleado(eEmpleados empleado[], int tam)
                 		break;
 
                 	default:
-                		printf("Error. Opcion invalida\n");
+                		printf("Error. Opcion invalida.\n");
                 }
             }
             while(salir == 'n');
@@ -571,7 +568,6 @@ int modificarEmpleado(eEmpleados empleado[], int tam)
     }
     else
     {
-        system("cls");
         printf("No se ha encontrado ningun empleado cargado . . .\n");
         printf("Por favor, ingrese un empleado.\n");
         system("pause");
@@ -586,13 +582,14 @@ int modificarEmpleado(eEmpleados empleado[], int tam)
 int modificarDatos()
 {
     int opcion;
-    printf("\n----- ¿Que desea Modificar ? -----\n\n");
+    printf("\n----- ¿Que desea Modificar? -----\n\n");
     printf("1. Nombre.\n");
     printf("2. Apellido.\n");
     printf("3. Salario.\n");
     printf("4. Sector.\n");
     printf("5. Salir.\n\n");
     printf("Ingrese unas de las opciones: ");
+    fflush(stdin);
     scanf("%d", &opcion);
     return opcion;
 }
@@ -610,8 +607,6 @@ void informar(eEmpleados empleados[], int tam)
 
     if(buscarEmpleado(empleados,tam))
     {
-        system("cls");
-        printf("\n----- Informes -----\n\n");
         do
         {
             switch(menuInformes())
@@ -637,14 +632,13 @@ void informar(eEmpleados empleados[], int tam)
             		break;
 
             	default:
-            		printf("\nError. Opcion invalida\n");
+            		printf("\nError. Opcion invalida.\n");
             }
         }
         while(salir == 'n');
     }
     else
     {
-        system("cls");
         printf("No hay ningun empleado cargado . . .\n");
         printf("Por favor, ingrese un empleado.\n");
         system("pause");
@@ -659,7 +653,7 @@ int menuInformes()
 {
     int opcion;
 
-    printf("-------------------------------------------------------------------\n");
+    printf("\n---------------------------- Informes ----------------------------\n\n");
     printf("1. Listado de empleados.\n");
     printf("2. Listado de los empleados ordeandos alfabéticamente por Apellido y Sector.\n");
     printf("3. Total y promedio de los salarios.\n");
@@ -682,8 +676,7 @@ void printEmployees(eEmpleados empleado[], int tam)
 
     bandera = 0;
 
-    system("cls");
-    printf("\n------- Lista de Empleados -------\n\n");
+    printf("\n----------------------- Lista de Empleados -----------------------\n\n");
 
     printf(" ID          Nombre       Apellido       Salario       Sector \n\n");
 
@@ -698,8 +691,7 @@ void printEmployees(eEmpleados empleado[], int tam)
 
     if(bandera == 0)
     {
-    	system("cls");
-        printf("\n-----No hay empleados que mostrar-----");
+        printf("\n----- No hay empleados que mostrar -----");
     }
     printf("\n\n");
 }
@@ -712,8 +704,6 @@ void printEmployees(eEmpleados empleado[], int tam)
 void sortEmployees(eEmpleados empleado[], int tam)
 {
     eEmpleados auxEmpleado;
-
-    system("cls");
 
     for(int i = 0; i < tam-1 ; i++)
     {
@@ -756,10 +746,9 @@ void totalPromedio(eEmpleados empleados[],int tam)
     promedio = total / contador;
 
     system("cls");
-    printf("\n---- Total y Promedio de Salarios ----\n");
-    printf("\nLa suma total de los salarios es : %.2f ",total);
-    printf("\nEl promedio es : %.2f ",promedio);
-    printf("\n");
+    printf("\n------------------ Total y Promedio de Salarios ------------------\n");
+    printf("\nLa suma total de los salarios es: %.2f ", total);
+    printf("\nEl promedio es: %.2f\n ", promedio);
 }
 
 /// @fn void empleadosSalarioPromedio(eEmpleados[], int)
@@ -789,9 +778,8 @@ void empleadosSalarioPromedio(eEmpleados empleados[],int tam)
     }
     promedio = total / contador;
 
-    system("cls");
-    printf("---- Empleados que superan el salario promedio ----\n");
-    printf("\nEl promedio de los salarios es : %.2f ",promedio);
+    printf("\n----------- Empleados que superan el salario promedio -----------\n");
+    printf("\nEl promedio de los salarios es: %.2f ",promedio);
     printf("\nEmpleados :\n\n");
 
     for(int i = 0; i < tam ; i++)
@@ -802,6 +790,5 @@ void empleadosSalarioPromedio(eEmpleados empleados[],int tam)
             mostrarEmpleado(empleados[i]);
         }
     }
-    printf("Los empleados que lo superan son : %d",promedioSuperado);
-    printf("\n");
+    printf("Los empleados que lo superan son: %d\n",promedioSuperado);
 }
