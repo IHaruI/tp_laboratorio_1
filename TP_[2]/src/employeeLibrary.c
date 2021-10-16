@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <string.h>
+#include <ctype.h>
 
 /// @fn void initEmployees(eEmpleados[], int)
 /// @brief Indica que las posiciones estan vacias (pone en verdadero todas las posiciones).
@@ -50,8 +51,13 @@ int altaEmpleado(eEmpleados empleado[],int tam, int id)
     int indice;
     char name[51];
     char lastname[51];
+    char ingresarSalario[51];
     float salary;
+    char ingresarSector[51];
     int sector;
+    int validarCadena;
+    int validarNumeroFlotante;
+    int validarNumeroEntero;
 
     retorno = 0;
 
@@ -68,17 +74,71 @@ int altaEmpleado(eEmpleados empleado[],int tam, int id)
     {
     	printf("Ingrese su nombre: ");
     	fflush(stdin);
-    	gets(name);
+    	fgets(name, 51, stdin);
+    	cambio(name);
+    	validarCadena = ValidarCadena(name);
+
+    	while(validarCadena == 1)
+    	{
+    		printf("Error. Ingrese solo cadena de caracteres.\n\n");
+    		printf("Ingrese su nombre: ");
+			fflush(stdin);
+	    	fgets(name, 51, stdin);
+	    	cambio(name);
+			validarCadena = ValidarCadena(name);
+    	}
 
     	printf("Ingrese su apellido: ");
     	fflush(stdin);
-    	gets(lastname);
+    	fgets(lastname, 51, stdin);
+    	cambio(lastname);
+    	validarCadena = ValidarCadena(lastname);
+
+    	while(validarCadena == 1)
+    	{
+    		printf("Error. Ingrese solo cadena de caracteres.\n\n");
+        	printf("Ingrese su apellido: ");
+        	fflush(stdin);
+        	fgets(lastname, 51, stdin);
+        	cambio(lastname);
+        	validarCadena = ValidarCadena(lastname);
+    	}
 
         printf("Ingrese su salario: ");
-        scanf("%f", &salary);
+    	fflush(stdin);
+    	fgets(ingresarSalario, 51, stdin);
+    	cambio(ingresarSalario);
+    	validarNumeroFlotante = ValidarNumeroFlotante(ingresarSalario);
+
+    	while(validarNumeroFlotante == 1)
+    	{
+    		printf("Error. Ingrese solo nuneros flotantes.\n\n");
+            printf("Ingrese su salario: ");
+        	fflush(stdin);
+        	fgets(ingresarSalario, 51, stdin);
+        	cambio(ingresarSalario);
+        	validarNumeroFlotante = ValidarNumeroFlotante(ingresarSalario);
+    	}
+
+    	salary = atof(ingresarSalario);    // Transforma la cadena de caracteres un valor flotante.
 
         printf("Ingrese su sector: ");
-        scanf("%d", &sector);
+    	fflush(stdin);
+    	fgets(ingresarSector, 51, stdin);
+    	cambio(ingresarSector);
+    	validarNumeroEntero = ValidarNumeroEntero(ingresarSector);
+
+    	while(validarNumeroEntero == 1)
+    	{
+    		printf("Error. Ingrese solo nuneros enteros.\n\n");
+            printf("Ingrese su sector: ");
+        	fflush(stdin);
+        	fgets(ingresarSector, 51, stdin);
+        	cambio(ingresarSector);
+        	validarNumeroEntero = ValidarNumeroEntero(ingresarSector);
+    	}
+
+    	sector = atoi(ingresarSector);    // Transforma la cadena de caracteres a un valor entero.
 
         empleado[indice] = addEmployees(id, name, lastname, salary, sector);
         retorno = 1;
@@ -107,6 +167,111 @@ int buscarIndiceLibre(eEmpleados empleados[], int tam)
         }
     }
     return indice;
+}
+
+/// @fn void cambio(char[])
+/// @brief Cambia el \n del fgets a \0.
+/// @param palabra Recibe una cadena de caracteres.
+
+void cambio(char palabra[51])
+{
+	for(int i = 0; i < 51; i++)
+	{
+		if(palabra[i] == '\n')
+		{
+			palabra[i] = '\0';
+		}
+	}
+}
+
+/// @fn int ValidarCadena(char[])
+/// @brief Verifica si se ingreso algun numero en el string.
+/// @param cadena Recibe una cadena de caracteres.
+/// @return Un 0 si no se ingreso ningun numero, de lo contrario retorna 1.
+
+int ValidarCadena(char cadena[])
+{
+	int i;
+	int j;
+	int validarCadena;
+
+	i = 0;
+	validarCadena = 0;
+
+	j = strlen(cadena);
+
+	while(i < j && validarCadena == 0)
+	{
+		if(isalpha(cadena[i]) != 0) // isalpha = Regresa un valor diferente de 0, si el caracter que lleva como por parametro
+		{							//			 se encuentra entre los rangos del codgo ASCII (65 a 90 y 97 a 122).
+			i++;
+		}
+		else
+		{
+			validarCadena = 1;
+		}
+	}
+	return validarCadena;
+}
+
+/// @fn int ValidarNumeroFlotante(char[])
+/// @brief Verifica si se ingreso algun caracter en el pedido de un flotante.
+/// @param numeroFlotante Recibe el numero flotante en cadena de caracteres.
+/// @return Un 0 si no se ingreso ningun numero, de lo contrario retorna 1.
+
+int ValidarNumeroFlotante(char numeroFlotante[])
+{
+	int i;
+	int j;
+	int validarCadena;
+
+	i = 0;
+	validarCadena = 0;
+
+	j = strlen(numeroFlotante);
+
+	while(i < j && validarCadena == 0)
+	{
+		if(isdigit(numeroFlotante[i]) != 0 || numeroFlotante[i] == '.')
+		{
+			i++;
+		}
+		else
+		{
+			validarCadena = 1;
+		}
+	}
+	return validarCadena;
+}
+
+/// @fn int ValidarNumeroEntero(char[])
+/// @brief Verifica si se ingreso algun caracter en el pedido de un entero.
+/// @param numeroEntero Recibe el numero entero en cadena de caracteres.
+/// @return Un 0 si no se ingreso ningun numero, de lo contrario retorna 1.
+
+int ValidarNumeroEntero(char numeroEntero[])
+{
+	int i;
+	int j;
+	int validarCadena;
+
+	i = 0;
+	validarCadena = 0;
+
+	j = strlen(numeroEntero);
+
+	while(i < j && validarCadena == 0)
+	{
+		if(isdigit(numeroEntero[i]) != 0)  // isdigit = Regresa un valor diferente de 0, si el caracter que lleva como por parametro es un numero.
+		{								   // 			Entre el rango de (48 a 57) del codigo ASCII.
+			i++;
+		}
+		else
+		{
+			validarCadena = 1;
+		}
+	}
+	return validarCadena;
 }
 
 /// @fn eEmpleados addEmployees(int, char[], char[], float, int)
@@ -263,8 +428,13 @@ int modificarEmpleado(eEmpleados empleado[], int tam)
     char salir;
     char name[51];
     char lastName[51];
+    char ingresarSalario[51];
     float salario;
+    char ingresarSector[51];
     int Sector;
+    int validarCadena;
+    int validarNumeroFlotante;
+    int validarNumeroEntero;
 
     retorno = 0;
     salir = 'n';
@@ -299,6 +469,18 @@ int modificarEmpleado(eEmpleados empleado[], int tam)
                 		fflush(stdin);
                 		fgets(name, 51, stdin);
                 		cambio(name);
+                		validarCadena = ValidarCadena(name);
+
+                    	while(validarCadena == 1)
+                    	{
+                    		printf("Error. Ingrese solo cadena de caracteres.\n\n");
+                    		printf("Ingrese su nombre: ");
+                			fflush(stdin);
+                	    	fgets(name, 51, stdin);
+                	    	cambio(name);
+                			validarCadena = ValidarCadena(name);
+                    	}
+
                 		strcpy(empleado[indice].name, name);
                 		printf("\nNombre actualizado.\n");
                 		retorno = 1;
@@ -310,6 +492,18 @@ int modificarEmpleado(eEmpleados empleado[], int tam)
                 		fflush(stdin);
                 		fgets(lastName, 51, stdin);
                 		cambio(lastName);
+                		validarCadena = ValidarCadena(lastName);
+
+                    	while(validarCadena == 1)
+                    	{
+                    		printf("Error. Ingrese solo cadena de caracteres.\n\n");
+                        	printf("Ingrese su apellido: ");
+                        	fflush(stdin);
+                        	fgets(lastName, 51, stdin);
+                        	cambio(lastName);
+                        	validarCadena = ValidarCadena(lastName);
+                    	}
+
                 		strcpy(empleado[indice].lastName, lastName);
                 		printf("\nApellido actualizado.\n");
                 		retorno = 1;
@@ -318,7 +512,22 @@ int modificarEmpleado(eEmpleados empleado[], int tam)
 
                 	case 3:
                 		printf("Ingrese nuevo salario: ");
-                    	scanf("%f", &salario);
+                		fflush(stdin);
+                		fgets(ingresarSalario, 51, stdin);
+                		cambio(ingresarSalario);
+                		validarNumeroFlotante = ValidarNumeroFlotante(ingresarSalario);
+
+                		while (validarNumeroFlotante == 1)
+                		{
+							printf("Error. Ingrese solo nuneros flotantes.\n\n");
+							printf("Ingrese su salario: ");
+							fflush(stdin);
+							fgets(ingresarSalario, 51, stdin);
+							cambio(ingresarSalario);
+							validarNumeroFlotante = ValidarNumeroFlotante(ingresarSalario);
+                		}
+
+                		salario = atof(ingresarSalario);
                     	empleado[indice].salary = salario;
                     	printf("\nSalario del empleado actualizado.\n");
                     	retorno = 1;
@@ -327,7 +536,22 @@ int modificarEmpleado(eEmpleados empleado[], int tam)
 
                 	case 4:
                 		printf("Ingrese nuevo sector: ");
-                		scanf("%d", &Sector);
+                		fflush(stdin);
+                		fgets(ingresarSector, 51, stdin);
+                		cambio(ingresarSector);
+                		validarNumeroEntero = ValidarNumeroEntero(ingresarSector);
+
+                		while (validarNumeroEntero == 1)
+                		{
+                			printf("Error. Ingrese solo nuneros enteros.\n\n");
+                			printf("Ingrese su sector: ");
+                			fflush(stdin);
+                			fgets(ingresarSector, 51, stdin);
+                			cambio(ingresarSector);
+                			validarNumeroEntero = ValidarNumeroEntero(ingresarSector);
+                		}
+
+                		Sector = atoi(ingresarSector);
                 		empleado[indice].sector = Sector;
                 		printf("\nSector del empleado actualizado.\n");
                 		retorno = 1;
@@ -371,21 +595,6 @@ int modificarDatos()
     printf("Ingrese unas de las opciones: ");
     scanf("%d", &opcion);
     return opcion;
-}
-
-/// @fn void cambio(char[])
-/// @brief Cambia el \n del fgets a \0.
-/// @param palabra
-
-void cambio(char palabra[51])
-{
-	for(int i = 0; i < 51; i++)
-	{
-		if(palabra[i] == '\n')
-		{
-			palabra[i] = '\0';
-		}
-	}
 }
 
 /// @fn void informar(eEmpleados[], int)
