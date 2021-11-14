@@ -72,6 +72,8 @@ void mostrarMenuDeOrdenamiento()
 	printf("\n----------- Menu de Ordenamiento -----------\n");
 	printf("\n1. Ordenar los empleados por Id.\n");
 	printf("2. Ordenar los empleados por Nombre.\n");
-	printf("3. Salir.\n");
+	printf("3. Ordenar los empleados por Horas Trabajadas.\n");
+	printf("4. Ordenar los empleados por Salario.\n");
+	printf("5. Salir.\n");
 	printf("\n--------------------------------------------\n");
 }

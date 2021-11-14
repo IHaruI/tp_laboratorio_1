@@ -229,7 +229,7 @@ int ordenarEmpleados(LinkedList* cloneList)
     do
     {
     	mostrarMenuDeOrdenamiento();
-    	opcion = getInt(opcion, "\nIngrese la opcion que desee: ", "\nError, ingrese unas de las opciones dadas.: ", 1, 3);
+    	opcion = getInt(opcion, "\nIngrese la opcion que desee: ", "\nError, ingrese unas de las opciones dadas.: ", 1, 5);
 
 		switch(opcion)
 		{
@@ -248,8 +248,24 @@ int ordenarEmpleados(LinkedList* cloneList)
 				retorno = ll_sort(cloneList, employee_CompareName, order);
 				controller_ListEmployee(cloneList);
 			break;
+
+			case 3:
+				printf("\n-------------------------------------------------------");
+				order = getInt(order, "\nIngrese 0 para ordenar de forma descendente (X-1): \nIngrese 1 para ordenar de forma ascendente (1-X): ", "\nError, ingrese unas de las opciones dadas: ", 0, 1);
+				printf("\nOrdenando. . .\n");
+				retorno = ll_sort(cloneList, employee_CompareHoursWorked, order);
+				controller_ListEmployee(cloneList);
+				break;
+
+			case 4:
+				printf("\n-------------------------------------------------------");
+				order = getInt(order, "\nIngrese 0 para ordenar de forma descendente (X-1): \nIngrese 1 para ordenar de forma ascendente (1-X): ", "\nError, ingrese unas de las opciones dadas: ", 0, 1);
+				printf("\nOrdenando. . .\n");
+				retorno = ll_sort(cloneList, employee_CompareSalary, order);
+				controller_ListEmployee(cloneList);
+				break;
 		}
-    }while(opcion != 3);
+    }while(opcion != 5);
 
     return retorno;
 }

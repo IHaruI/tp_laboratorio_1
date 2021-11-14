@@ -26,5 +26,7 @@ int employee_getSueldo(Employee* this, int* sueldo);
 
 int employee_compareId(void* e1, void* e2);
 int employee_CompareName(void* e1, void* e2);
+int employee_CompareHoursWorked(void* e1, void* e2);
+int employee_CompareSalary(void* e1, void* e2);
 
 #endif // employee_H_INCLUDED

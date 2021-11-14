@@ -254,3 +254,53 @@ int employee_CompareName(void* e1, void* e2)
     }
     return retorno;
 }
+
+int employee_CompareHoursWorked(void* e1, void* e2)
+{
+    Employee* pEmployee1 = (Employee*) e1;
+    Employee* pEmployee2 = (Employee*) e2;
+    int horas1;
+    int horas2;
+    int retorno = 0;
+
+    if(pEmployee1 != NULL && pEmployee2 != NULL)
+    {
+    	employee_getHorasTrabajadas(pEmployee1, &horas1);
+    	employee_getHorasTrabajadas(pEmployee2, &horas2);
+
+    	if(horas1 > horas2)
+    	{
+    		retorno = 1;
+    	}
+    	else if(horas1 < horas2)
+    	{
+    		retorno = -1;
+    	}
+    }
+    return retorno;
+}
+
+int employee_CompareSalary(void* e1, void* e2)
+{
+    Employee* pEmployee1 = (Employee*) e1;
+    Employee* pEmployee2 = (Employee*) e2;
+    int salario1;
+    int salario2;
+    int retorno = 0;
+
+    if(pEmployee1 != NULL && pEmployee2 != NULL)
+    {
+    	employee_getSueldo(pEmployee1, &salario1);
+    	employee_getSueldo(pEmployee2, &salario2);
+
+    	if(salario1 > salario2)
+    	{
+    		retorno = 1;
+    	}
+    	else if(salario1 < salario2)
+    	{
+    		retorno = -1;
+    	}
+    }
+    return retorno;
+}
