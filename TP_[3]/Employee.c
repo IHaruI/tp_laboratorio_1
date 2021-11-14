@@ -202,10 +202,10 @@ void employee_delete(Employee* this)
 }
 
 /// @fn int employee_compareId(void*, void*)
-/// @brief Compara IDs de dos empleados.
+/// @brief Compara el ID de los empleados.
 /// @param e1 void*
 /// @param e2 void*
-/// @return 1 si el primer ID es mayor que el segundo, si no lo es retornara -1.
+/// @return 1 si el primer ID (id1) es mayor que el segundo (id2), si no lo es retornara -1.
 
 int employee_compareId(void* e1, void* e2)
 {
@@ -255,6 +255,12 @@ int employee_CompareName(void* e1, void* e2)
     return retorno;
 }
 
+/// @fn int employee_CompareHoursWorked(void*, void*)
+/// @brief Compara las horas trabajadas de los empleados.
+/// @param e1 void*
+/// @param e2 void*
+/// @return 1 si las horas trabajadas (horas1) son mayores o iguales que las de horas2, si no lo es retornara -1.
+
 int employee_CompareHoursWorked(void* e1, void* e2)
 {
     Employee* pEmployee1 = (Employee*) e1;
@@ -279,6 +285,12 @@ int employee_CompareHoursWorked(void* e1, void* e2)
     }
     return retorno;
 }
+
+/// @fn int employee_CompareSalary(void*, void*)
+/// @brief Compara el salario de los empleados.
+/// @param e1 void*
+/// @param e2 void*
+/// @return 1 si el salario (salario1) es mayor o igual que el salario2, si no lo es retornara -1.
 
 int employee_CompareSalary(void* e1, void* e2)
 {

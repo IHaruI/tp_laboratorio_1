@@ -44,12 +44,12 @@ void mostrarOpciones()
 
 void mostrarMenuDeModificacion()
 {
-	printf("\n----------- Opciones -----------\n");
+	printf("\n----------- Menu de Modificacion -----------\n");
     printf("\n1. Modificar Nombre.\n");
     printf("2. Modificar Horas de Trabajo.\n");
     printf("3. Modificar Sueldo.\n");
     printf("4. Regresar.\n");
-    printf("\n--------------------------------\n");
+    printf("\n--------------------------------------------\n");
 }
 
 /// @fn void mostrarMenuEliminado()

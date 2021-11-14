@@ -229,7 +229,7 @@ int ordenarEmpleados(LinkedList* cloneList)
     do
     {
     	mostrarMenuDeOrdenamiento();
-    	opcion = getInt(opcion, "\nIngrese la opcion que desee: ", "\nError, ingrese unas de las opciones dadas.: ", 1, 5);
+    	opcion = getInt(opcion, "\nIngrese la opcion que desee: ", "\nError, ingrese unas de las opciones dadas: ", 1, 5);
 
 		switch(opcion)
 		{
